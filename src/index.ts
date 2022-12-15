@@ -5,7 +5,7 @@ import sharp from 'sharp'
 const app = express()
 const port = 3000
 
-app.use('/api', routes)
+app.use('/', routes)
 
 
 
