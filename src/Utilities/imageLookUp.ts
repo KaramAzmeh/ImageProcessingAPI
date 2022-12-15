@@ -11,15 +11,15 @@ const imageLookUp = (req: express.Request, res: express.Response, next: Function
     const query = req.query
     const queryResponse: QueryResponse = {
         filename: query.filename as string,
-        width: query.width as unknown as number,
-        height: query.height as unknown as number,
+        width: Number(query.width),
+        height: Number(query.height),
     }
 
-    console.log(`Queried filename is: ${queryResponse.filename} width: ${queryResponse.width}, height: ${queryResponse.height}`)
+    console.log(`Queried filename is: ${queryResponse.filename}, width: ${queryResponse.width}, height: ${queryResponse.height}`)
     // res.sendFile(filepath)
-    resize
-
+    resize(queryResponse.filename, queryResponse.width, queryResponse.height)?.then().catch(e => { console.log(`Error in resize: ${e}`)})
     next()
+    
 }
 
 export default imageLookUp
